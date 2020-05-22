@@ -2,6 +2,9 @@
   <dictionary name="Omar">
     <words>
       <w>libtcod</w>
+      <w>npcs</w>
+      <w>omars</w>
+      <w>roguelike</w>
     </words>
   </dictionary>
 </component>
