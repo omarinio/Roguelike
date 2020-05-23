@@ -54,7 +54,8 @@ def main():
 
         if move:
             dx, dy = move
-            if not map.is_blocked(player.x + dx, player.y + dy):
+            if not map.is_blocked(player.x + dx, player.y + dy) and map_width-1 > player.x + dx > 0 and map_height-1 > \
+                    player.y + dy > 0:
                 player.move(dx, dy)
 
         if exit:
