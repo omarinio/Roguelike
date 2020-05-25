@@ -26,6 +26,7 @@ def main():
 
     # initialise the map
     map = Map(map_width, map_height)
+    map.create_map()
 
     # choose font for rendering
     libtcod.console_set_custom_font('arial10x10.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD)
