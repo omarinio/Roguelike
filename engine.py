@@ -13,6 +13,11 @@ def main():
     map_width = 80
     map_height = 45
 
+    # room limits and dimensions
+    max_room_size = 10
+    min_room_size = 6
+    total_room_limit = 30
+
     colours = {
         'dark_wall': libtcod.Color(60, 49, 32),
         'dark_ground': libtcod.Color(96, 128, 56),
@@ -25,13 +30,8 @@ def main():
     entities = [player, npc]
 
     # initialise the map
-    map = Map(map_width, map_height)
-    map.create_map()
-
-    map.horizontal_tunnel(30, 35, 22)
-    map.vertical_tunnel(15, 10, 25)
-    map.horizontal_tunnel(25, 40, 10)
-    map.vertical_tunnel(15, 10, 40)
+    game_map = Map(map_width, map_height)
+    game_map.create_map(total_room_limit, min_room_size, max_room_size, map_width, map_height, player)
 
     # choose font for rendering
     libtcod.console_set_custom_font('arial10x10.png', libtcod.FONT_TYPE_GREYSCALE | libtcod.FONT_LAYOUT_TCOD)
@@ -47,7 +47,7 @@ def main():
         # checks for mouse or key interrupt
         libtcod.sys_check_for_event(libtcod.EVENT_KEY_PRESS, key, mouse)
         # renders all entities
-        render_all(con, entities, screen_width, screen_height, colours, map)
+        render_all(con, entities, screen_width, screen_height, colours, game_map)
         libtcod.console_flush()
 
         clear_all(con, entities)
@@ -60,7 +60,7 @@ def main():
 
         if move:
             dx, dy = move
-            if not map.is_blocked(player.x + dx, player.y + dy) and map_width-1 > player.x + dx > 0 and map_height-1 > \
+            if not game_map.is_blocked(player.x + dx, player.y + dy) and map_width-1 > player.x + dx > 0 and map_height-1 > \
                     player.y + dy > 0:
                 player.move(dx, dy)
 
